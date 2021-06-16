@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+import pandas as pd 
 import os
 
 #Get current location of the script
@@ -34,28 +35,34 @@ parent_dir = cwd + "/Directory/UEFA-Euro-2020/Matches/"
 # Path
 path = os.path.join(parent_dir, directory)
 
-#Cretion of the folder to save the information in
+#Creation of the folder to save the information in
 if(os.path.exists(path) == False):
   os.mkdir(path)
+
+matchListPath = cwd + "/Directory/UEFA-Euro-2020/"
 
 #Taking away the information of the match through the url
 matchInfo = matchInfo.split('-')
 
-localCountry = matchInfo[0]
-awayCountry = matchInfo[1]
+localTeamName = matchInfo[0]
+awayTeamName = matchInfo[1]
 date = matchInfo[2]+'-'+matchInfo[3]+'-'+matchInfo[4]
 competition = matchInfo[5] + " " + matchInfo[6]
 
+matchList = pd.read_csv(matchListPath + 'MatchList.csv')
+new_row = {'Url': url, 'LocalTeam': localTeamName, 'AwayTeam': awayTeamName, 'Date': date, 'Competition': competition}
+matchList = matchList.append(new_row, ignore_index=True)
+
 #Finding the id of the teams in order to find their stats, this by using Selenium
 #Using the local team name to find the link with the id
-localTeam = driver.find_element_by_link_text(localCountry)
+localTeam = driver.find_element_by_link_text(localTeamName)
 
 #Taking the id out of the hyperlink in their attributes
 localTeamId = localTeam.get_attribute('href')
 localTeamId = localTeamId[28:36]
 
 #Using the away team name to find the link with the id
-awayTeam = driver.find_element_by_link_text(awayCountry)
+awayTeam = driver.find_element_by_link_text(awayTeamName)
 
 #Taking the id out of the hyperlink in their attributes
 awayTeamId = awayTeam.get_attribute('href')
@@ -77,37 +84,37 @@ soup = BeautifulSoup(page_source, 'lxml')
 
 LocalGeneral = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_summary"})
 
-text_file = open(path + "/" + localCountry + "GeneralStats" + "vs" + awayCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + localTeamName + "GeneralStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(LocalGeneral.text)
 text_file.close()
 
 LocalPassing = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_passing"}) 
 
-text_file = open(path + "/" + localCountry + "PassingStats" + "vs" + awayCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + localTeamName + "PassingStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(LocalPassing.text)
 text_file.close()
 
 LocalPassingType = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_passing_types"}) 
 
-text_file = open(path + "/" + localCountry + "PassingTypeStats" + "vs" + awayCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + localTeamName + "PassingTypeStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(LocalPassingType.text)
 text_file.close()
 
 LocalDefending = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_defense"}) 
 
-text_file = open(path + "/" + localCountry + "DefenseStats" + "vs" + awayCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + localTeamName + "DefenseStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(LocalDefending.text)
 text_file.close()
 
 LocalPossession = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_possession"}) 
 
-text_file = open(path + "/" + localCountry + "PossessionStats" + "vs" + awayCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + localTeamName + "PossessionStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(LocalPossession.text)
 text_file.close()
 
 LocalMisc = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_misc"}) 
 
-text_file = open(path + "/" + localCountry + "MiscStats" + "vs" + awayCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + localTeamName + "MiscStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(LocalMisc.text)
 text_file.close()
 
@@ -123,37 +130,37 @@ soup = BeautifulSoup(page_source, 'lxml')
 
 AwayGeneral = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_summary"})
 
-text_file = open(path + "/" + awayCountry + "GeneralStats" + "vs" + localCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + awayTeamName + "GeneralStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(AwayGeneral.text)
 text_file.close()
 
 AwayPassing = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_passing"}) 
 
-text_file = open(path + "/" + awayCountry + "PassingStats" + "vs" + localCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + awayTeamName + "PassingStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(AwayPassing.text)
 text_file.close()
 
 AwayPassingType = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_passing_types"}) 
 
-text_file = open(path + "/" + awayCountry + "PassingTypeStats" + "vs" + localCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + awayTeamName + "PassingTypeStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(AwayPassingType.text)
 text_file.close()
 
 AwayDefending = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_defense"}) 
 
-text_file = open(path + "/" + awayCountry + "DefenseStats" + "vs" + localCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + awayTeamName + "DefenseStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(AwayDefending.text)
 text_file.close()
 
 AwayPossession = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_possession"}) 
 
-text_file = open(path + "/" + awayCountry + "PossessionStats" + "vs" + localCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + awayTeamName + "PossessionStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(AwayPossession.text)
 text_file.close()
 
 AwayMisc = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_misc"}) 
 
-text_file = open(path + "/" + awayCountry + "MiscStats" + "vs" + localCountry + ".csv", "w", encoding='utf-8')
+text_file = open(path + "/" + awayTeamName + "MiscStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(AwayMisc.text)
 text_file.close()
 
