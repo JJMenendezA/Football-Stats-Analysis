@@ -55,23 +55,23 @@ def remove_dup_cols(df: pd.DataFrame) -> pd.DataFrame:
 print('Loading local team info...')
 #Creating the dataframes for each one of the .csv files
 #Match information is used to name the different files
-generalLocal = pd.read_csv(location + localTeam + "GeneralStats" + "vs" + awayTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5) 
+generalLocal = pd.read_csv(location + localTeam + "GeneralStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
 generalLocal = generalLocal.iloc[:-1]
 
 
-passingLocal = pd.read_csv(location + localTeam + "PassingStats" + "vs" + awayTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5) 
+passingLocal = pd.read_csv(location + localTeam + "PassingStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
 passingLocal = passingLocal.iloc[:-1]
 
-passingTypeLocal = pd.read_csv(location + localTeam + "PassingTypeStats" + "vs" + awayTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+passingTypeLocal = pd.read_csv(location + localTeam + "PassingTypeStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 passingTypeLocal = passingTypeLocal.iloc[:-1]
 
-defenseLocal = pd.read_csv(location + localTeam + "DefenseStats" + "vs" + awayTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+defenseLocal = pd.read_csv(location + localTeam + "DefenseStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 defenseLocal = defenseLocal.iloc[:-1]
 
-possessionLocal = pd.read_csv(location + localTeam+ "PossessionStats" + "vs" + awayTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+possessionLocal = pd.read_csv(location + localTeam+ "PossessionStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 possessionLocal = possessionLocal.iloc[:-1]
 
-cardsLocal = pd.read_csv(location + localTeam + "MiscStats" + "vs" + awayTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+cardsLocal = pd.read_csv(location + localTeam + "MiscStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 cardsLocal = cardsLocal.iloc[:-1]
 
 print('Local team info loaded.')
@@ -90,28 +90,28 @@ print('Successful merge.')
 
 #Saving the resume of the team previously mentioned
 print('Creating local team resume...')
-dataLocal.to_csv(r'D:/Chamba/Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + localTeam + 'ResumeVs' +awayTeam+ '.csv')
+dataLocal.to_csv(r'D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + localTeam + 'ResumeVs' +awayTeam+ '.csv')
 print('Local team resume done.')
 
 print('Loading away team info...')
 #Creating the dataframes for each one of the .csv files
 #Match information is used to name the different files
-generalAway = pd.read_csv(location + awayTeam + "GeneralStats" + "vs" + localTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5) 
+generalAway = pd.read_csv(location + awayTeam + "GeneralStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
 generalAway = generalAway.iloc[:-1]
 
-passingAway = pd.read_csv(location + awayTeam + "PassingStats" + "vs" + localTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5) 
+passingAway = pd.read_csv(location + awayTeam + "PassingStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
 passingAway = passingAway.iloc[:-1]
 
-passingTypeAway = pd.read_csv(location + awayTeam + "PassingTypeStats" + "vs" + localTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+passingTypeAway = pd.read_csv(location + awayTeam + "PassingTypeStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 passingTypeAway = passingTypeAway.iloc[:-1]
 
-defenseAway = pd.read_csv(location + awayTeam + "DefenseStats" + "vs" + localTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+defenseAway = pd.read_csv(location + awayTeam + "DefenseStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 defenseAway = defenseAway.iloc[:-1]
 
-possessionAway = pd.read_csv(location + awayTeam+ "PossessionStats" + "vs" + localTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+possessionAway = pd.read_csv(location + awayTeam+ "PossessionStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 possessionAway = possessionAway.iloc[:-1]
 
-cardsAway = pd.read_csv(location + awayTeam + "MiscStats" + "vs" + localTeam + ".csv", encoding = "ISO-8859-1", skiprows = 5)
+cardsAway = pd.read_csv(location + awayTeam + "MiscStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
 cardsAway = cardsAway.iloc[:-1]
 
 print('Away team info loaded.')
@@ -130,7 +130,7 @@ print('Successful merge.')
 
 #Saving the resume of the team previously mentioned
 print('Creating away team resume...')
-dataAway.to_csv(r'D:/Chamba/Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + awayTeam + 'ResumeVs' +localTeam+ '.csv')
+dataAway.to_csv(r'D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + awayTeam + 'ResumeVs' +localTeam+ '.csv')
 print('Away team resume done.')
 
 #Merging all the dataframes of both teams into a single one
@@ -140,5 +140,5 @@ print('Successful merge.')
 
 #Saving the resume of both teams
 print('Creating match resume...')
-dataGeneralBothTeams.to_csv(r'D:/Chamba/Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + 'Resume'+ localTeam + 'Vs' +awayTeam+ '.csv')
+dataGeneralBothTeams.to_csv(r'D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + 'Resume'+ localTeam + 'Vs' +awayTeam+ '.csv')
 print('Match resume done.')

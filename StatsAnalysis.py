@@ -28,8 +28,8 @@ while menu:
         awayTeam = matchInfo[1]
         competition = matchInfo[5] + '-' + matchInfo[6]
 
-        dataLocalTeam = pd.read_csv(location + localTeam + 'ResumeVs' +awayTeam+ '.csv', encoding = 'ISO-8859-1')  
-        dataAwayTeam = pd.read_csv(location + awayTeam + 'ResumeVs' + localTeam+ '.csv', encoding = 'ISO-8859-1')
+        dataLocalTeam = pd.read_csv(location + localTeam + 'ResumeVs' +awayTeam+ '.csv', encoding = 'utf-8')  
+        dataAwayTeam = pd.read_csv(location + awayTeam + 'ResumeVs' + localTeam+ '.csv', encoding = 'utf-8')
         print('===============================================================================')
         print('Match information was loaded successfully!')
         
