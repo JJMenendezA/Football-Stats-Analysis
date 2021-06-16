@@ -2,6 +2,10 @@ from datetime import date
 from os import stat
 from numpy.lib.function_base import select
 import pandas as pd 
+import os
+
+#Get current location of the script
+cwd = os.getcwd()
 
 #Interactive menu to see the different stats of the teams, loading information by url
 menu = True
@@ -20,7 +24,7 @@ while menu:
 
         matchInfo = url[38:]
 
-        location ='D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
+        location = cwd + '/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
 
         matchInfo = matchInfo.split('-')
 

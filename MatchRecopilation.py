@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 import itertools as it
 from typing import List
 from toolz.itertoolz import sliding_window
+import os
+
+#Get current location of the script
+cwd = os.getcwd()
 
 #Asking the user for a url of the match
 url = input("Enter url of the match [frebf]: ")
@@ -12,7 +16,7 @@ url = input("Enter url of the match [frebf]: ")
 matchInfo = url[38:]
 
 #Location of the information of the matches
-location ='D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
+location = cwd + '/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
 
 #Taking away the information of the match through the url
 matchInfo = matchInfo.split('-')
@@ -90,7 +94,7 @@ print('Successful merge.')
 
 #Saving the resume of the team previously mentioned
 print('Creating local team resume...')
-dataLocal.to_csv(r'D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + localTeam + 'ResumeVs' +awayTeam+ '.csv')
+dataLocal.to_csv(cwd + '/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + localTeam + 'ResumeVs' +awayTeam+ '.csv')
 print('Local team resume done.')
 
 print('Loading away team info...')
@@ -130,7 +134,7 @@ print('Successful merge.')
 
 #Saving the resume of the team previously mentioned
 print('Creating away team resume...')
-dataAway.to_csv(r'D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + awayTeam + 'ResumeVs' +localTeam+ '.csv')
+dataAway.to_csv(cwd +'/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + awayTeam + 'ResumeVs' +localTeam+ '.csv')
 print('Away team resume done.')
 
 #Merging all the dataframes of both teams into a single one
@@ -140,5 +144,5 @@ print('Successful merge.')
 
 #Saving the resume of both teams
 print('Creating match resume...')
-dataGeneralBothTeams.to_csv(r'D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + 'Resume'+ localTeam + 'Vs' +awayTeam+ '.csv')
+dataGeneralBothTeams.to_csv(cwd +'/Directory/UEFA-Euro-2020/Matches/' + localTeam + '-' + awayTeam + '-' + date + '-' + competition + '/' + 'Resume'+ localTeam + 'Vs' +awayTeam+ '.csv')
 print('Match resume done.')
