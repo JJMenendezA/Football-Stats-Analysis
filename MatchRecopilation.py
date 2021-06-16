@@ -12,7 +12,7 @@ url = input("Enter url of the match [frebf]: ")
 matchInfo = url[38:]
 
 #Location of the information of the matches
-location ='D:/Chamba/Analysis/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
+location ='D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
 
 #Taking away the information of the match through the url
 matchInfo = matchInfo.split('-')

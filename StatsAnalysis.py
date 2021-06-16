@@ -20,7 +20,7 @@ while menu:
 
         matchInfo = url[38:]
 
-        location ='D:/Chamba/Analysis/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
+        location ='D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'
 
         matchInfo = matchInfo.split('-')
 

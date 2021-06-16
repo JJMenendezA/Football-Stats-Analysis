@@ -26,7 +26,7 @@ matchInfo = url[38:]
 directory = matchInfo
   
 # Parent Directory path
-parent_dir = "D:/Chamba/Analysis/Directory/UEFA-Euro-2020/Matches/"
+parent_dir = "D:/Chamba/Analysis/Football-Stats-Analysis/Directory/UEFA-Euro-2020/Matches/"
   
 # Path
 path = os.path.join(parent_dir, directory)
