@@ -34,9 +34,26 @@ while menu:
 
         matchInfo = matchInfo.split('-')
 
-        localTeam = matchInfo[0]
-        awayTeam = matchInfo[1]
-        competition = matchInfo[5] + '-' + matchInfo[6]
+        if(matchInfo[0] == 'Czech' or matchInfo[0] == 'North'):
+            localTeam = matchInfo[0] + ' ' + matchInfo[1]
+            if(matchInfo[2] == 'Czech' or matchInfo[2] == 'North'):
+                awayTeam = matchInfo[2] + ' ' + matchInfo[3]
+                date = matchInfo[4]+'-'+matchInfo[5]+'-'+matchInfo[6]
+                competition = matchInfo[7] + " " + matchInfo[8]
+            else: 
+                awayTeam = matchInfo[2]
+                date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
+                competition = matchInfo[6] + " " + matchInfo[7]
+        else:
+                localTeam = matchInfo[0]
+                if(matchInfo[1] == 'Czech' or matchInfo[1] == 'North'):
+                    awayTeam = matchInfo[1] + ' ' + matchInfo[2]
+                    date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
+                    competition = matchInfo[6] + " " + matchInfo[7]
+                else: 
+                    awayTeam = matchInfo[1]
+                    date = matchInfo[2]+'-'+matchInfo[3]+'-'+matchInfo[4]
+                    competition = matchInfo[5] + " " + matchInfo[6]
 
         dataLocalTeam = pd.read_csv(location + localTeam + 'ResumeVs' +awayTeam+ '.csv', encoding = 'utf-8')  
         dataAwayTeam = pd.read_csv(location + awayTeam + 'ResumeVs' + localTeam+ '.csv', encoding = 'utf-8')

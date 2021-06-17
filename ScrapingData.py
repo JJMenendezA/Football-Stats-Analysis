@@ -47,10 +47,27 @@ matchListPath = cwd + "/Directory/UEFA-Euro-2020/"
 #Taking away the information of the match through the url
 matchInfo = matchInfo.split('-')
 
-localTeamName = matchInfo[0]
-awayTeamName = matchInfo[1]
-date = matchInfo[2]+'-'+matchInfo[3]+'-'+matchInfo[4]
-competition = matchInfo[5] + " " + matchInfo[6]
+if(matchInfo[0] == 'Czech' or matchInfo[0] == 'North'):
+  localTeamName = matchInfo[0] + ' ' + matchInfo[1]
+  if(matchInfo[2] == 'Czech' or matchInfo[2] == 'North'):
+    awayTeamName = matchInfo[2] + ' ' + matchInfo[3]
+    date = matchInfo[4]+'-'+matchInfo[5]+'-'+matchInfo[6]
+    competition = matchInfo[7] + "-" + matchInfo[8]
+  else: 
+    awayTeamName = matchInfo[2]
+    date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
+    competition = matchInfo[6] + "-" + matchInfo[7]
+else:
+  localTeamName = matchInfo[0]
+  if(matchInfo[1] == 'Czech' or matchInfo[1] == 'North'):
+    awayTeamName = matchInfo[1] + ' ' + matchInfo[2]
+    date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
+    competition = matchInfo[6] + "-" + matchInfo[7]
+  else: 
+    awayTeamName = matchInfo[1]
+    date = matchInfo[2]+'-'+matchInfo[3]+'-'+matchInfo[4]
+    competition = matchInfo[5] + "-" + matchInfo[6]
+  
 
 #Adding the match to a list .csv
 print('Adding match to the list...')
