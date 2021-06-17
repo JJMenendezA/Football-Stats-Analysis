@@ -55,9 +55,10 @@ competition = matchInfo[5] + " " + matchInfo[6]
 #Adding the match to a list .csv
 print('Adding match to the list...')
 matchList = pd.read_csv(matchListPath + 'MatchList.csv')
-new_row = {'Url': url, 'LocalTeam': localTeamName, 'AwayTeam': awayTeamName, 'Date': date, 'Competition': competition}
+new_row = {'Url': url, 'LocalTeam': localTeamName, 'AwayTeam': awayTeamName, 'Date': date, 'Competition': competition, 'Checked': 'No'}
 matchList = matchList.append(new_row, ignore_index=True)
-matchList.to_csv(matchListPath + 'MatchList.csv')
+matchList = matchList.sort_values(by='Date', ascending=True)
+matchList.to_csv(matchListPath + 'MatchList.csv', index=False)
 print('Match added to the list!')
 
 #Finding the id of the teams in order to find their stats, this by using Selenium
