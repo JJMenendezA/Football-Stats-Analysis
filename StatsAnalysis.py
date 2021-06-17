@@ -15,13 +15,19 @@ while menu:
     print('Welcome to my analysis machine!')
     print('===============================================================================')
     print('What do you want to do?')
-    print('1.Load match information.')
+    print('1.Select match.')
     print('2.Exit.')
     answer = input('Choose an option [Number]: ')
     if(answer == '1'):
         print('===============================================================================')
-        url = input('Enter url of the desired match: ')
+        matchList = pd.read_csv(cwd +'/Directory/UEFA-Euro-2020/MatchList.csv')
 
+        for index, row in matchList.iterrows():
+            print(index + 1, row.LocalTeam + ' Vs '+ row.AwayTeam + ' ' + row.Date + ' ' + row.Competition)
+        
+        matchAnswer = input('Select number of the desired match: ')
+
+        url = matchList.Url[int(matchAnswer)-1]
         matchInfo = url[38:]
 
         location = cwd + '/Directory/UEFA-Euro-2020/Matches/' + matchInfo + '/'

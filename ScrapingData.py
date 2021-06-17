@@ -18,6 +18,7 @@ browser.add_argument('--headless')
 #Location of the chromedriver executable to open the browser
 driver = webdriver.Chrome("D:\chromedriver_win32\chromedriver.exe", options=browser)
 
+print("Opening browser...")
 #The driver will wait until the webpage is loaded, it will maximize it and finally get the url given by the user
 driver.implicitly_wait(5)
 driver.maximize_window()
@@ -38,7 +39,9 @@ path = os.path.join(parent_dir, directory)
 #Creation of the folder to save the information in
 if(os.path.exists(path) == False):
   os.mkdir(path)
+  print('Creating new folder named: ' + directory)
 
+#Opening the path to the match list .csv
 matchListPath = cwd + "/Directory/UEFA-Euro-2020/"
 
 #Taking away the information of the match through the url
@@ -49,9 +52,13 @@ awayTeamName = matchInfo[1]
 date = matchInfo[2]+'-'+matchInfo[3]+'-'+matchInfo[4]
 competition = matchInfo[5] + " " + matchInfo[6]
 
+#Adding the match to a list .csv
+print('Adding match to the list...')
 matchList = pd.read_csv(matchListPath + 'MatchList.csv')
 new_row = {'Url': url, 'LocalTeam': localTeamName, 'AwayTeam': awayTeamName, 'Date': date, 'Competition': competition}
 matchList = matchList.append(new_row, ignore_index=True)
+matchList.to_csv(matchListPath + 'MatchList.csv')
+print('Match added to the list!')
 
 #Finding the id of the teams in order to find their stats, this by using Selenium
 #Using the local team name to find the link with the id
@@ -82,6 +89,7 @@ page_source = driver.page_source
 #Using BeautifulSoup to find the different stats of the teams with their id and creating a new .csv file with the information
 soup = BeautifulSoup(page_source, 'lxml')
 
+print('Getting information from the local team...')
 LocalGeneral = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_summary"})
 
 text_file = open(path + "/" + localTeamName + "GeneralStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
@@ -117,6 +125,7 @@ LocalMisc = soup.find("pre", {"id": "csv_stats_"+ localTeamId +"_misc"})
 text_file = open(path + "/" + localTeamName + "MiscStats" + "vs" + awayTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(LocalMisc.text)
 text_file.close()
+print('Local team information completed!')
 
 #Away Team Stats
 #Clicking the different buttons to get the information into .csv
@@ -128,6 +137,7 @@ page_source = driver.page_source
 #Using BeautifulSoup to find the different stats of the teams with their id and creating a new .csv file with the information
 soup = BeautifulSoup(page_source, 'lxml')
 
+print('Getting information from the away team...')
 AwayGeneral = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_summary"})
 
 text_file = open(path + "/" + awayTeamName + "GeneralStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
@@ -163,6 +173,8 @@ AwayMisc = soup.find("pre", {"id": "csv_stats_"+ awayTeamId +"_misc"})
 text_file = open(path + "/" + awayTeamName + "MiscStats" + "vs" + localTeamName + ".csv", "w", encoding='utf-8')
 n = text_file.write(AwayMisc.text)
 text_file.close()
+print('Away team information completed!')
 
 #Closing the driver
 driver.quit
+print('Scraping completed!')
