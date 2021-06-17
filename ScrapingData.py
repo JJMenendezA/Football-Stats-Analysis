@@ -12,6 +12,7 @@ url = input("Enter url of the match [frebf]: ")
 # Setup the Selenium webdriver to open the url in a icognito Chrome window
 browser = webdriver.ChromeOptions()
 browser.add_argument('--ignore-certificate-errors')
+browser.add_argument("--log-level=3")
 browser.add_argument('--incognito')
 browser.add_argument('--headless')
 
@@ -48,22 +49,28 @@ matchListPath = cwd + "/Directory/UEFA-Euro-2020/"
 matchInfo = matchInfo.split('-')
 
 if(matchInfo[0] == 'Czech' or matchInfo[0] == 'North'):
-  localTeamName = matchInfo[0] + ' ' + matchInfo[1]
+  localTeamNameLink = matchInfo[0] + ' ' + matchInfo[1]
+  localTeamName = matchInfo[0] + '-' + matchInfo[1]
   if(matchInfo[2] == 'Czech' or matchInfo[2] == 'North'):
-    awayTeamName = matchInfo[2] + ' ' + matchInfo[3]
+    awayTeamNameLink = matchInfo[2] + ' ' + matchInfo[3]
+    awayTeamName = matchInfo[2] + '-' + matchInfo[3]
     date = matchInfo[4]+'-'+matchInfo[5]+'-'+matchInfo[6]
     competition = matchInfo[7] + "-" + matchInfo[8]
   else: 
+    awayTeamNameLink = matchInfo[2]
     awayTeamName = matchInfo[2]
     date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
     competition = matchInfo[6] + "-" + matchInfo[7]
 else:
+  localTeamNameLink = matchInfo[0]
   localTeamName = matchInfo[0]
   if(matchInfo[1] == 'Czech' or matchInfo[1] == 'North'):
-    awayTeamName = matchInfo[1] + ' ' + matchInfo[2]
+    awayTeamNameLink = matchInfo[1] + ' ' + matchInfo[2]
+    awayTeamName = matchInfo[1] + '-' + matchInfo[2]
     date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
     competition = matchInfo[6] + "-" + matchInfo[7]
   else: 
+    awayTeamNameLink = matchInfo[1]
     awayTeamName = matchInfo[1]
     date = matchInfo[2]+'-'+matchInfo[3]+'-'+matchInfo[4]
     competition = matchInfo[5] + "-" + matchInfo[6]
@@ -72,7 +79,7 @@ else:
 #Adding the match to a list .csv
 print('Adding match to the list...')
 matchList = pd.read_csv(matchListPath + 'MatchList.csv')
-new_row = {'Url': url, 'LocalTeam': localTeamName, 'AwayTeam': awayTeamName, 'Date': date, 'Competition': competition, 'Checked': 'No'}
+new_row = {'Url': url, 'LocalTeam': localTeamNameLink, 'AwayTeam': awayTeamNameLink, 'Date': date, 'Competition': competition, 'Checked': 'No'}
 matchList = matchList.append(new_row, ignore_index=True)
 matchList = matchList.sort_values(by='Date', ascending=True)
 matchList.to_csv(matchListPath + 'MatchList.csv', index=False)
@@ -80,14 +87,14 @@ print('Match added to the list!')
 
 #Finding the id of the teams in order to find their stats, this by using Selenium
 #Using the local team name to find the link with the id
-localTeam = driver.find_element_by_link_text(localTeamName)
+localTeam = driver.find_element_by_link_text(localTeamNameLink)
 
 #Taking the id out of the hyperlink in their attributes
 localTeamId = localTeam.get_attribute('href')
 localTeamId = localTeamId[28:36]
 
 #Using the away team name to find the link with the id
-awayTeam = driver.find_element_by_link_text(awayTeamName)
+awayTeam = driver.find_element_by_link_text(awayTeamNameLink)
 
 #Taking the id out of the hyperlink in their attributes
 awayTeamId = awayTeam.get_attribute('href')

@@ -56,9 +56,9 @@ for index, row in matchList.iterrows():
         matchInfo = matchInfo.split('-')
 
         if(matchInfo[0] == 'Czech' or matchInfo[0] == 'North'):
-            localTeam = matchInfo[0] + ' ' + matchInfo[1]
+            localTeam = matchInfo[0] + '-' + matchInfo[1]
             if(matchInfo[2] == 'Czech' or matchInfo[2] == 'North'):
-                awayTeam = matchInfo[2] + ' ' + matchInfo[3]
+                awayTeam = matchInfo[2] + '-' + matchInfo[3]
                 date = matchInfo[4]+'-'+matchInfo[5]+'-'+matchInfo[6]
                 competition = matchInfo[7] + "-" + matchInfo[8]
             else: 
@@ -68,7 +68,7 @@ for index, row in matchList.iterrows():
         else:
                 localTeam = matchInfo[0]
                 if(matchInfo[1] == 'Czech' or matchInfo[1] == 'North'):
-                    awayTeam = matchInfo[1] + ' ' + matchInfo[2]
+                    awayTeam = matchInfo[1] + '-' + matchInfo[2]
                     date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
                     competition = matchInfo[6] + "-" + matchInfo[7]
                 else: 
