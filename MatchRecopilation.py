@@ -111,6 +111,7 @@ for index, row in matchList.iterrows():
 
         #Removing the duplicated columns
         dataLocal = remove_dup_cols(dataLocal)
+        dataLocal['Team'] = localTeam
         print('Successful merge.')
 
         #Saving the resume of the team previously mentioned
@@ -151,6 +152,7 @@ for index, row in matchList.iterrows():
 
         #Removing the duplicated columns
         dataAway = remove_dup_cols(dataAway)
+        dataAway['Team'] = awayTeam
         print('Successful merge.')
 
         #Saving the resume of the team previously mentioned
