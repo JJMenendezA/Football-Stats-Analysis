@@ -9,7 +9,7 @@ cwd = os.getcwd()
 
 #Interactive menu to see the different stats of the teams, loading information by url
 menu = True
-listStats = ['1.Shooting', '2.Passing', '3.Receiving', '4.Creativity', '5.Dribbles', '6.Carries', '7.Tackles', '8.Pressures']
+listStats = ['1.Shooting', '2.Passing', '3.Receiving', '4.Creativity', '5.Dribbles', '6.Carries', '7.Tackles', '8.Pressures', '9.Aerial Duels', '10.Fouls & Cards']
 while menu:
     print('===============================================================================')
     print('Welcome to my analysis machine!')
@@ -102,7 +102,7 @@ while menu:
                     if(statType == '1'):
                         if(teamAnswer == '1'):
                             shootingDataLocalTeam = dataLocalTeam[dataLocalTeam.Sh_x > 0]
-                            shootingDataLocalTeam = dataLocalTeam.sort_values(by='Sh_x', ascending=False)
+                            shootingDataLocalTeam = dataLocalTeam.sort_values(['Gls','Sh_x'], ascending=False)
 
                             print('===============================================================================')
                             print('Top 5 players of ' +localTeam + ' with most shots in the game')
@@ -111,7 +111,7 @@ while menu:
                         
                         elif(teamAnswer == '2'):
                             shootingDataAwayTeam = dataAwayTeam[dataAwayTeam.Sh_x > 0]
-                            shootingDataAwayTeam = dataAwayTeam.sort_values(by='Sh_x', ascending=False)
+                            shootingDataAwayTeam = dataAwayTeam.sort_values(['Gls','Sh_x'], ascending=False)
 
                             print('===============================================================================')
                             print('Top 5 players of ' +awayTeam + ' with most shots in the game')
@@ -128,7 +128,7 @@ while menu:
                             print('===============================================================================')
                             print('Top 5 players of ' +localTeam + ' with higher pass conversion than team average ')
                             print('===============================================================================')
-                            print(passingDataLocalTeam[['Player', 'Pos', 'Att_x', 'Cmp_x', 'Cmp%', 'xA','TotDist_x', 'PrgDist_x', 'Att.1_y', 'Cmp.1', 'Cmp%.1', 'Att.2', 'Cmp.2', 'Cmp%.2', 'Att.3', 'Cmp.3', 'Cmp%.3']].head(5))
+                            print(passingDataLocalTeam[['Player', 'Pos', 'Min','Att_x', 'Cmp_x', 'Cmp%','TotDist_x', 'PrgDist_x', 'Att.1_y', 'Cmp.1', 'Cmp%.1', 'Att.2', 'Cmp.2', 'Cmp%.2', 'Att.3', 'Cmp.3', 'Cmp%.3']].head(5))
 
                         elif(teamAnswer == '2'):
                         
@@ -141,7 +141,7 @@ while menu:
                             print('===============================================================================')
                             print('Top 5 players of ' +awayTeam + ' with higher pass conversion than team average ')
                             print('===============================================================================')
-                            print(passingDataAwayTeam[['Player', 'Pos', 'Att_x', 'Cmp_x', 'Cmp%', 'xA','TotDist_x', 'PrgDist_x', 'Att.1_y', 'Cmp.1', 'Cmp%.1', 'Att.2', 'Cmp.2', 'Cmp%.2', 'Att.3', 'Cmp.3', 'Cmp%.3']].head(5))
+                            print(passingDataAwayTeam[['Player', 'Pos', 'Min', 'Att_x', 'Cmp_x', 'Cmp%','TotDist_x', 'PrgDist_x', 'Att.1_y', 'Cmp.1', 'Cmp%.1', 'Att.2', 'Cmp.2', 'Cmp%.2', 'Att.3', 'Cmp.3', 'Cmp%.3']].head(5))
 
                     elif(statType == '3'):
                         if(teamAnswer == '1'):
@@ -159,6 +159,111 @@ while menu:
                             print('===============================================================================')
                             print(receivingDataAwayTeam[['Player', 'Pos', 'Min', 'Touches_x','Targ', 'Rec', 'Rec%', 'Prog.1_y']].head(5))
                     
+                    elif(statType == '4'):
+                        if(teamAnswer == '1'):
+                            creativityDataLocalTeam = dataLocalTeam.sort_values(by='SCA', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +localTeam + ' that created more opportunities')
+                            print('===============================================================================')
+                            print(creativityDataLocalTeam[['Player', 'Pos', 'Min', 'Gls', 'xG', 'Sh_x', 'SoT', 'Ast','xA', 'SCA', 'GCA', 'KP', 'CPA', 'PPA']].head(5))
+
+                        elif(teamAnswer == '2'):
+                            creativityDataAwayTeam = dataAwayTeam.sort_values(by='SCA', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +awayTeam + ' that created more opportunities')
+                            print('===============================================================================')
+                            print(creativityDataAwayTeam[['Player', 'Pos', 'Min', 'Gls', 'xG', 'Sh_x', 'SoT', 'SCA', 'GCA','Ast','xA', 'KP', 'CPA', 'PPA']].head(5))
+                    
+                    elif(statType == '5'):
+                        if(teamAnswer == '1'):
+                            dribblingDataLocalTeam = dataLocalTeam.sort_values(by='Att.1_x', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 dribblers of ' +localTeam )
+                            print('===============================================================================')
+                            print(dribblingDataLocalTeam[['Player', 'Pos', 'Min', 'Att.1_x', 'Succ', 'Succ%', '#Pl', 'Megs', 'Fld']].head(5))
+
+                        elif(teamAnswer == '2'):
+                            dribblingDataAwayTeam = dataAwayTeam.sort_values(by='Att.1_x', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 dribblers of ' +awayTeam )
+                            print('===============================================================================')
+                            print(dribblingDataAwayTeam[['Player', 'Pos', 'Min', 'Att.1_x', 'Succ', 'Succ%', '#Pl', 'Megs', 'Fld']].head(5))
+                    
+                    elif(statType == '6'):
+                        if(teamAnswer == '1'):
+                            carriesDataLocalTeam = dataLocalTeam.sort_values(by='Carries_y', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +localTeam+ ' with the most carries' )
+                            print('===============================================================================')
+                            print(carriesDataLocalTeam[['Player', 'Pos', 'Min', 'Carries_y', 'TotDist_y', 'PrgDist_y', 'Prog_y', '1/3_y', 'CPA', 'Mis', 'Dis']].head(5))
+
+                        elif(teamAnswer == '2'):
+                            carriesDataAwayTeam = dataAwayTeam.sort_values(by='Carries_y', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +awayTeam+ ' with the most carries' )
+                            print('===============================================================================')
+                            print(carriesDataAwayTeam[['Player', 'Pos', 'Min', 'Carries_y', 'TotDist_y', 'PrgDist_y', 'Prog_y', '1/3_y', 'CPA', 'Mis', 'Dis']].head(5))
+
+                    elif(statType == '7'):
+                        if(teamAnswer == '1'):
+                            tacklesDataLocalTeam = dataLocalTeam.sort_values(by='Tkl_y', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +localTeam+ ' with the most tackles' )
+                            print('===============================================================================')
+                            print(tacklesDataLocalTeam[['Player', 'Pos', 'Min', 'Tkl_y', 'TklW_x', 'Tkl.1', 'Tkl%', 'Past', 'Int_x', 'Tkl+Int', 'Clr', 'Mis']].head(5))
+
+                        elif(teamAnswer == '2'):
+                            tacklesDataAwayTeam = dataAwayTeam.sort_values(by='Tkl_y', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +awayTeam+ ' with the most carries' )
+                            print('===============================================================================')
+                            print(tacklesDataAwayTeam[['Player', 'Pos', 'Min', 'Tkl_y', 'TklW_x', 'Tkl.1', 'Tkl%', 'Past', 'Int_x', 'Tkl+Int', 'Clr', 'Mis']].head(5))
+                    
+                    elif(statType == '8'):
+                        if(teamAnswer == '1'):
+                            tacklesDataLocalTeam = dataLocalTeam.sort_values(by='Press', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +localTeam+ ' with the most pressings' )
+                            print('===============================================================================')
+                            print(tacklesDataLocalTeam[['Player', 'Pos', 'Min', 'Press', 'Succ_y', '%', 'Def 3rd.1', 'Recov', 'Att 3rd.1', 'Blocks', 'Sh_y', 'ShSv', 'Pass']].head(5))
+
+                        elif(teamAnswer == '2'):
+                            tacklesDataAwayTeam = dataAwayTeam.sort_values(by='Press', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +awayTeam+ ' with the most pressings' )
+                            print('===============================================================================')
+                            print(tacklesDataAwayTeam[['Player', 'Pos', 'Min', 'Press', 'Succ_y', '%', 'Def 3rd.1', 'Att 3rd.1', 'Recov', 'Blocks', 'Sh_y', 'ShSv', 'Pass']].head(5))
+                    
+                    elif(statType == '9'):
+                        if(teamAnswer == '1'):
+                            aerialDuelsDataLocalTeam = dataLocalTeam.sort_values(by='Won%', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +localTeam+ ' with the highest percentage of aerial duels won' )
+                            print('===============================================================================')
+                            print(aerialDuelsDataLocalTeam[['Player', 'Pos', 'Min', 'Won', 'Lost', 'Won%']].head(5))
+
+                        elif(teamAnswer == '2'):
+                            aerialDuelsDataAwayTeam = dataAwayTeam.sort_values(by='Won%', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +awayTeam+ ' with the highest percentage of aerial duels won' )
+                            print('===============================================================================')
+                            print(aerialDuelsDataAwayTeam[['Player', 'Pos', 'Min', 'Won', 'Lost', 'Won%']].head(5))
+
+                    elif(statType == '10'):
+                        if(teamAnswer == '1'):
+                            aerialDuelsDataLocalTeam = dataLocalTeam.sort_values(by='Fls', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +localTeam+ ' with most fouls committed' )
+                            print('===============================================================================')
+                            print(aerialDuelsDataLocalTeam[['Player', 'Pos', 'Min', 'Fls', 'CrdY_y', 'CrdR_y', '2CrdY']].head(5))
+
+                        elif(teamAnswer == '2'):
+                            aerialDuelsDataAwayTeam = dataAwayTeam.sort_values(by='Fls', ascending=False)
+                            print('===============================================================================')
+                            print('Top 5 players of ' +awayTeam+ ' with with most fouls committed' )
+                            print('===============================================================================')
+                            print(aerialDuelsDataAwayTeam[['Player', 'Pos', 'Min', 'Fls', 'CrdY_y', 'CrdR_y', '2CrdY']].head(5))
+
                     elif(statType == '-1'):
                         selectionAnswer = '-1'
 
