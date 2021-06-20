@@ -60,43 +60,43 @@ for index, row in matchList.iterrows():
             if(matchInfo[2] == 'Czech' or matchInfo[2] == 'North'):
                 awayTeam = matchInfo[2] + '-' + matchInfo[3]
                 date = matchInfo[4]+'-'+matchInfo[5]+'-'+matchInfo[6]
-                competition = matchInfo[7] + "-" + matchInfo[8]
+                competition = matchInfo[7] + '-' + matchInfo[8]
             else: 
                 awayTeam = matchInfo[2]
                 date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
-                competition = matchInfo[6] + "-" + matchInfo[7]
+                competition = matchInfo[6] + '-' + matchInfo[7]
         else:
                 localTeam = matchInfo[0]
                 if(matchInfo[1] == 'Czech' or matchInfo[1] == 'North'):
                     awayTeam = matchInfo[1] + '-' + matchInfo[2]
                     date = matchInfo[3]+'-'+matchInfo[4]+'-'+matchInfo[5]
-                    competition = matchInfo[6] + "-" + matchInfo[7]
+                    competition = matchInfo[6] + '-' + matchInfo[7]
                 else: 
                     awayTeam = matchInfo[1]
                     date = matchInfo[2]+'-'+matchInfo[3]+'-'+matchInfo[4]
-                    competition = matchInfo[5] + "-" + matchInfo[6]
+                    competition = matchInfo[5] + '-' + matchInfo[6]
 
 
         print('Loading local team info...')
         #Creating the dataframes for each one of the .csv files
         #Match information is used to name the different files
-        generalLocal = pd.read_csv(location + localTeam + "GeneralStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
+        generalLocal = pd.read_csv(location + localTeam + 'GeneralStats' + 'vs' + awayTeam + '.csv', encoding = 'utf-8', skiprows = 5) 
         generalLocal = generalLocal.iloc[:-1]
 
 
-        passingLocal = pd.read_csv(location + localTeam + "PassingStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
+        passingLocal = pd.read_csv(location + localTeam + 'PassingStats' + 'vs' + awayTeam + '.csv', encoding = 'utf-8', skiprows = 5) 
         passingLocal = passingLocal.iloc[:-1]
 
-        passingTypeLocal = pd.read_csv(location + localTeam + "PassingTypeStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        passingTypeLocal = pd.read_csv(location + localTeam + 'PassingTypeStats' + 'vs' + awayTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         passingTypeLocal = passingTypeLocal.iloc[:-1]
 
-        defenseLocal = pd.read_csv(location + localTeam + "DefenseStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        defenseLocal = pd.read_csv(location + localTeam + 'DefenseStats' + 'vs' + awayTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         defenseLocal = defenseLocal.iloc[:-1]
 
-        possessionLocal = pd.read_csv(location + localTeam+ "PossessionStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        possessionLocal = pd.read_csv(location + localTeam+ 'PossessionStats' + 'vs' + awayTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         possessionLocal = possessionLocal.iloc[:-1]
 
-        cardsLocal = pd.read_csv(location + localTeam + "MiscStats" + "vs" + awayTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        cardsLocal = pd.read_csv(location + localTeam + 'MiscStats' + 'vs' + awayTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         cardsLocal = cardsLocal.iloc[:-1]
 
         print('Local team info loaded.')
@@ -122,22 +122,22 @@ for index, row in matchList.iterrows():
         print('Loading away team info...')
         #Creating the dataframes for each one of the .csv files
         #Match information is used to name the different files
-        generalAway = pd.read_csv(location + awayTeam + "GeneralStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
+        generalAway = pd.read_csv(location + awayTeam + 'GeneralStats' + 'vs' + localTeam + '.csv', encoding = 'utf-8', skiprows = 5) 
         generalAway = generalAway.iloc[:-1]
 
-        passingAway = pd.read_csv(location + awayTeam + "PassingStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5) 
+        passingAway = pd.read_csv(location + awayTeam + 'PassingStats' + 'vs' + localTeam + '.csv', encoding = 'utf-8', skiprows = 5) 
         passingAway = passingAway.iloc[:-1]
 
-        passingTypeAway = pd.read_csv(location + awayTeam + "PassingTypeStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        passingTypeAway = pd.read_csv(location + awayTeam + 'PassingTypeStats' + 'vs' + localTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         passingTypeAway = passingTypeAway.iloc[:-1]
 
-        defenseAway = pd.read_csv(location + awayTeam + "DefenseStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        defenseAway = pd.read_csv(location + awayTeam + 'DefenseStats' + 'vs' + localTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         defenseAway = defenseAway.iloc[:-1]
 
-        possessionAway = pd.read_csv(location + awayTeam+ "PossessionStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        possessionAway = pd.read_csv(location + awayTeam+ 'PossessionStats' + 'vs' + localTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         possessionAway = possessionAway.iloc[:-1]
 
-        cardsAway = pd.read_csv(location + awayTeam + "MiscStats" + "vs" + localTeam + ".csv", encoding = 'utf-8', skiprows = 5)
+        cardsAway = pd.read_csv(location + awayTeam + 'MiscStats' + 'vs' + localTeam + '.csv', encoding = 'utf-8', skiprows = 5)
         cardsAway = cardsAway.iloc[:-1]
 
         print('Away team info loaded.')
