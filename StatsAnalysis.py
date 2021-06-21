@@ -346,6 +346,149 @@ while menu:
 
                     elif(statType == '-1'):
                         selectionAnswer = '-1'
+                
+                while(selectionAnswer == '2'):
+                    if(teamAnswer == '1'):
+                        print('Players of ' + localTeam)
+                        for index, row in dataLocalTeam.iterrows():
+                            row.Player = row.Player.split('\\')
+                            print(index + 1, row.Player[0])
+                        print('-1.Go back.')
+                        playerAnswer = input('Select player to see their stats: ')
+                        if(playerAnswer != '-1'):
+                            player = dataLocalTeam.loc[[int(playerAnswer) - 1]]
+                            playerName = player[['Player']].to_string(index = False,header=False)
+                            playerName = playerName.split('\\')
+                            playerName = playerName[0]
+                            statsLoop = True
+                        else: 
+                            selectionAnswer = '-1'
+                            statsLoop = False
+                    
+                    elif(teamAnswer == '2'):
+                        print('Players of ' + awayTeam)
+                        for index, row in dataAwayTeam.iterrows():
+                            row.Player = row.Player.split('\\')
+                            print(index + 1, row.Player[0])
+                        print('-1.Go back.')
+                        playerAnswer = input('Select player to see their stats: ')
+                        if(playerAnswer != '-1'):
+                            player = dataAwayTeam.loc[[int(playerAnswer) - 1]]
+                            playerName = player[['Player']].to_string(index = False,header=False)
+                            playerName = playerName.split('\\')
+                            playerName = playerName[0]
+                            statsLoop = True
+                        else: 
+                            selectionAnswer = '-1'
+                            statsLoop = False
+                    
+                    elif(teamAnswer == '3'):
+                        print('Players of the match')
+                        for index, row in dataBothTeams.iterrows():
+                            row.Player = row.Player.split('\\')
+                            print(index + 1, row.Player[0])
+                        print('-1.Go back.')
+                        playerAnswer = input('Select player to see their stats: ')
+                        if(playerAnswer != '-1'):
+                            player = dataBothTeams.loc[[int(playerAnswer) - 1]]
+                            playerName = player[['Player']].to_string(index = False,header=False)
+                            playerName = playerName.split('\\')
+                            playerName = playerName[0]
+                            statsLoop = True
+                        else: 
+                            selectionAnswer = '-1'
+                            statsLoop = False
+
+                    
+
+                    while(statsLoop):
+                        print('===============================================================================')
+                        print('Stats options: ')
+
+                        for stat in listStats:
+                            print(stat)
+                        print('-1.Go back.')
+                        print('===============================================================================')
+                        statType = input('Enter stats to see [Number]: ')
+
+                        if(statType == '1'):
+                        
+                            shootingPlayer = player.sort_values(['Gls','Sh_x'], ascending=False)
+
+                            print('===============================================================================')
+                            print('Shooting stats of: ' + playerName)
+                            print('===============================================================================')
+                            print(shootingPlayer[['Player', 'Pos', 'Min', 'Gls', 'Sh_x', 'SoT','xG', 'npxG']])
+
+                        elif(statType == '2'):
+                            passingPlayer = player.sort_values(by='Cmp%', ascending=False)
+                    
+                            print('===============================================================================')
+                            print('Passing stats of: ' + playerName)
+                            print('===============================================================================')
+                            print(passingPlayer[['Player', 'Pos', 'Min','Att_x', 'Cmp_x', 'Cmp%','TotDist_x', 'PrgDist_x', 'Att.1_y', 'Cmp.1', 'Cmp%.1', 'Att.2', 'Cmp.2', 'Cmp%.2', 'Att.3', 'Cmp.3', 'Cmp%.3']])
+                        
+                        elif(statType == '3'):
+                            
+                            receivingPlayer = player.sort_values(by='Targ', ascending=False)
+                            print('===============================================================================')
+                            print('Recieving stats of: ' + playerName)
+                            print('===============================================================================')
+                            print(receivingPlayer[['Player', 'Pos', 'Min', 'Touches_x', 'Targ', 'Rec', 'Rec%', 'Prog.1_y']])
+
+                        elif(statType == '4'):
+                        
+                            creativityPlayer = player.sort_values(by='SCA', ascending=False)
+                            print('===============================================================================')
+                            print('Creativity stats of: ' + playerName)
+                            print('===============================================================================')
+                            print(creativityPlayer[['Player', 'Pos', 'Min', 'Gls', 'xG', 'Sh_x', 'SoT', 'Ast','xA', 'SCA', 'GCA', 'KP', 'CPA', 'PPA']])
+
+                        elif(statType == '5'):
+
+                            dribblingPlayer = player.sort_values(['Att.1_x', 'Succ%'], ascending=False)
+                            print('===============================================================================')
+                            print('Dribbling stats of ' + playerName )
+                            print('===============================================================================')
+                            print(dribblingPlayer[['Player', 'Pos', 'Min', 'Att.1_x', 'Succ', 'Succ%', '#Pl', 'Megs', 'Fld']])
+                        
+                        elif(statType == '6'):
+                            carriesPlayer = player.sort_values(by='Carries_y', ascending=False)
+                            print('===============================================================================')
+                            print('Carrying stats of '  + playerName)
+                            print('===============================================================================')
+                            print(carriesPlayer[['Player', 'Pos', 'Min', 'Carries_y', 'TotDist_y', 'PrgDist_y', 'Prog_y', '1/3_y', 'CPA', 'Mis', 'Dis']])
+
+                        elif(statType == '7'):
+                            tacklesPlayer = player.sort_values(by='Tkl_y', ascending=False)
+                            print('===============================================================================')
+                            print('Tackling stats of ' + playerName )
+                            print('===============================================================================')
+                            print(tacklesPlayer[['Player', 'Pos', 'Min', 'Tkl_y', 'TklW_x', 'Tkl.1', 'Tkl%', 'Past', 'Int_x', 'Tkl+Int', 'Clr', 'Mis']])
+
+                        elif(statType == '8'):
+                            pressingPlayer = player.sort_values(by='Press', ascending=False)
+                            print('===============================================================================')
+                            print('Pressing stats of ' + playerName )
+                            print('===============================================================================')
+                            print(pressingPlayer[['Player', 'Pos', 'Min', 'Press', 'Succ_y', '%', 'Def 3rd.1', 'Recov', 'Att 3rd.1', 'Blocks', 'Sh_y', 'ShSv', 'Pass']])
+
+                        elif(statType == '9'):
+                            aerialDuelsPlayer = player.sort_values(by='Won%', ascending=False)
+                            print('===============================================================================')
+                            print('Aerial duels stats of ' + playerName )
+                            print('===============================================================================')
+                            print(aerialDuelsPlayer[['Player', 'Pos', 'Min', 'Won', 'Lost', 'Won%']])
+
+                        elif(statType == '10'):
+                            cardsPlayers = player.sort_values(by='Fls', ascending=False)
+                            print('===============================================================================')
+                            print('Fouling stats of ' + playerName)
+                            print('===============================================================================')
+                            print(cardsPlayers[['Player', 'Pos', 'Min', 'Fls', 'CrdY_y', 'CrdR_y', '2CrdY']].head(5))
+
+                        elif(statType == '-1'):
+                            statsLoop = False
 
     elif(answer == '2'):
         print('Machine closed.')

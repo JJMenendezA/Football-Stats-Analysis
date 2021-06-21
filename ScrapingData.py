@@ -9,7 +9,9 @@ cwd = os.getcwd()
 menu = True
 
 while menu:
-
+  print('===============================================================================')
+  print('Welcome to my scraping machine!')
+  print('===============================================================================')
   print('What do you want to do?')
   print('1.Scrap information of a match')
   print('2.Exit')
